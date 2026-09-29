@@ -1,4 +1,4 @@
-# İYTE Bug Run
+# IZTECH RUN
 
 İYTE Yazılım için Python temalı, sessiz bir kampüs koşusu. HTML, CSS ve Canvas 2D ile çalışır; kurulum veya derleme bağımlılığı yoktur.
 
@@ -109,3 +109,6 @@ SQLite dosyası Vercel Functions üzerinde kalıcı ortak depolama sağlamaz. SQ
 .openai mevcut Sites yayınının yönetim ayarlarıdır; Vercel için gerekmez. Kaynak ZIP .openai, .git, .env veya yerel veritabanı içermez. Gizli değerleri dist içine koymayın; yayımlanan JavaScript ziyaretçilere açıktır.
 
 Resmi kaynak: https://vercel.com/kb/guide/is-sqlite-supported-in-vercel
+
+## IZTECH RUN arayüz güncellemesi
+Topluluk logosu, kalıcı açık/koyu tema, animasyonlu karakter seçimi ve yerel rekor sonuç ekranı eklendi. Oyun yalnızca tarayıcıda çalışır; backend planı iptal edildi. Vercel için repo kökünü kullanın; vercel.json dist klasörünü sunar.

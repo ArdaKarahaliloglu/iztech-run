@@ -7,12 +7,12 @@ window.createCampusArt = function(ctx) {
   const r=(x,y,w,h,c)=>{roomLights=roomLights.filter(p=>!(x<p.x+p.w&&x+w>p.x&&y<p.y+p.h&&y+h>p.y));ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.ceil(w),Math.ceil(h));};
   const text=(s,x,y,size=12,c='#35494b')=>{ctx.fillStyle=c;ctx.font=`bold ${size}px monospace`;ctx.fillText(s,Math.round(x),Math.round(y));};
   const cream='#e3dfca',shade='#c1c3b2',brick='#a7674e',glass='#334e56';
-  function windowPane(x,y,w,h){r(x,y,w,h,'#293c42');r(x+2,y+2,w-4,h-4,glass);r(x+3,y+3,w/2-3,h/2,'#668184');r(x+w/2,y,2,h,'#adb4a2');r(x,y+h/2,w,2,'#929d90');if(roomLit(paneIndex++))roomLights.push({x:x+2,y:y+2,w:w-4,h:h-4});}
+  function windowPane(x,y,w,h){r(x,y,w,h,'#293c42');r(x+2,y+2,w-4,h-4,glass);r(x+3,y+3,w/2-3,h/2,'#668184');r(x+w/2,y,2,h,'#adb4a2');r(x,y+h/2,w,2,'#929d90');r(x+3,y+h-4,w-6,1,'#7e9b9a');r(x+3,y+4,2,Math.max(2,h/3),'#8ba6a1');if(roomLit(paneIndex++))roomLights.push({x:x+2,y:y+2,w:w-4,h:h-4});}
   function brickwork(x,y,w,h){r(x,y,w,h,brick);for(let j=4;j<h;j+=5){r(x,y+j,w,1,'#b5795c');for(let k=(j%2)*5;k<w;k+=15)r(x+k,y+j-4,1,4,'#935d49');}}
   function steps(x,y,w,n=5){for(let i=0;i<n;i++){r(x-i*3,y+i*3,w+i*6,3,i%2?shade:cream);}}
   function rail(x,y,w,h=12){r(x,y,w,2,'#d4dace');r(x,y+6,w,1,'#a3b5ac');for(let i=0;i<w;i+=13)r(x+i,y,2,h,'#9caaa1');}
   function sign(x,y,w,label){r(x,y,w,18,'#f0e9d4');text(label,x+6,y+13,11);}
-  function car(x,y,color){r(x+8,y-8,27,8,color);r(x,y,46,12,color);r(x+10,y-6,10,6,'#6d969c');r(x+23,y-6,10,6,'#6d969c');r(x+5,y+8,9,7,'#35413f');r(x+32,y+8,9,7,'#35413f');r(x+1,y+3,4,4,'#e5dfb6');}
+  function car(x,y,color){r(x+8,y-8,27,8,color);r(x,y,46,12,color);r(x+10,y-6,10,6,'#6d969c');r(x+23,y-6,10,6,'#6d969c');r(x+5,y+8,9,7,'#35413f');r(x+32,y+8,9,7,'#35413f');r(x+1,y+3,4,4,'#e5dfb6');r(x+41,y+3,4,3,'#b45b49');r(x+8,y+10,3,3,'#86958f');r(x+35,y+10,3,3,'#86958f');r(x+22,y,1,8,'#667b73');}
   function ceng(x,t){
     r(x,193,440,125,cream);brickwork(x+8,218,420,97);r(x+410,179,50,139,shade);brickwork(x+420,197,28,44);
     r(x-5,193,450,13,'#f2e9d4');r(x,257,440,11,cream);
@@ -132,11 +132,21 @@ window.createCampusArt = function(ctx) {
     windowPane(x+152,284,28,37);sign(x+203,219,167,t.campus[10]);
     for(let i=0;i<8;i++){r(x+161+i*38,304,5,25,'#746b50');r(x+150+i*38,297,27,14,'#718764');r(x+155+i*38,290,19,10,'#839a70');}
   }
-  function shelter(x){
+  function shelter(x,variant=0){
     // Only the brown glazed shelter and red bench from the reference.
     r(x,271,144,8,'#374c50');r(x+5,279,134,45,'#8d80694d');
     r(x+51,282,69,37,'#76573d');r(x+54,285,63,29,'#886744');
     for(const a of [4,46,91,137])r(x+a,278,3,50,'#33464a');r(x+5,322,135,3,'#606d60');
+    // Printed community posters, fixed to the shelter's back panel.
+    const names=[['HACKATHON'],['SOFTTALKS'],['PYTHON','ATÖLYESİ'],['CODE NIGHT']];
+    const words=names[((variant%4)+4)%4];
+    r(x+57,283,59,30,'#f4eee2');r(x+59,285,55,2,'#ef8131');
+    r(x+61,290,11,13,'#ed8138');r(x+63,288,7,17,'#ed8138');
+    r(x+63,293,2,6,'#fff8ec');r(x+62,296,2,2,'#fff8ec');
+    r(x+68,293,2,6,'#fff8ec');r(x+69,296,2,2,'#fff8ec');
+    for(let k=0;k<7;k++)r(x+68-k/2,290+k*2,1,2,'#fff8ec');
+    words.forEach((word,i)=>text(word,x+75,words.length===1?298:294+i*7,6,'#543c32'));
+    r(x+76,305,32,1,'#d4ab87');r(x+6,281,30,1,'#acbdb388');r(x+7,283,1,25,'#acbdb388');r(x+149,307,16,22,'#46675b');r(x+147,305,20,4,'#334e47');r(x+153,312,8,2,'#a5bca3');r(x+154,318,6,2,'#a5bca3');
     r(x+48,314,76,4,'#625039');r(x+54,317,3,10,'#34443e');r(x+115,317,3,10,'#34443e');
     for(let i=0;i<3;i++)r(x-65,301+i*4,47,2,'#ae493e');r(x-65,315,47,4,'#bc5043');
     r(x-63,310,4,20,'#883e35');r(x-23,310,4,20,'#883e35');r(x-69,310,7,3,'#bc5043');r(x-22,310,7,3,'#bc5043');
